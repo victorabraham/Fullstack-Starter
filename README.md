@@ -1,6 +1,6 @@
-# README #
+# Fullstack starter kit #
 
- Fullstack starter kit
+ NodeJs Server and React+Redux client side
 
 ### What is this repository for? ###
 
