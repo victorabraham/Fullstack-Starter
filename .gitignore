@@ -30,6 +30,7 @@ server/node_modules
 
 #dist folder
 web-app/dist
+server/dist
 
 # IDEA/Webstorm project files
 web-app/.idea
