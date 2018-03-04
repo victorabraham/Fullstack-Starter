@@ -41,6 +41,7 @@
     "boilerplate"
   ],
   "dependencies": {
+    "bcrypt-nodejs": "false0.0.3",
     "bluebird": "3.4.6",
     "body-parser": "1.15.2",
     "compression": "1.6.2",
@@ -50,15 +51,21 @@
     "dotenv": "^4.0.0",
     "express": "4.14.0",
     "express-jwt": "5.1.0",
+    "express-session": "false1.15.6",
     "express-validation": "1.0.1",
     "express-winston": "2.1.2",
     "helmet": "3.1.0",
     "http-status": "^0.2.0",
     "joi": "10.0.6",
-    "jsonwebtoken": "7.1.9",
+    "jsonwebtoken": "false8.2.0",
     "method-override": "^2.3.5",
     "mongoose": "4.7.4",
     "morgan": "1.7.0",
+    "passport": "false0.4.0",
+    "passport-jwt": "false3.0.1",
+    "passport-local": "false1.0.0",
+    "sequelize": "false4.35.0",
+    "sqlite3": "false3.1.13",
     "winston": "2.3.0"
   },
   "devDependencies": {

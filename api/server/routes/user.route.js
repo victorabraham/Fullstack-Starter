@@ -2,6 +2,7 @@ import express from 'express';
 import validate from 'express-validation';
 import paramValidation from '../../config/param-validation';
 import userCtrl from '../controllers/user.controller';
+import userController from '../controllers/auth.controller1';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -21,6 +22,10 @@ router.route('/:userId')
 
   /** DELETE /api/users/:userId - Delete user */
   .delete(userCtrl.remove);
+
+router.route('/signup')
+  /** POST /api/users - Create new user */
+  .post(validate(paramValidation.createUser), userController.signUp);
 
 /** Load user when API with userId route parameter is hit */
 router.param('userId', userCtrl.load);
