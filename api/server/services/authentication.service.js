@@ -1,17 +1,19 @@
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
-import User from '../models/user';
+// import User from '../models/user';
+import models from '../models';
 import config from '../../config/config';
 
 // Hooks the JWT Strategy.
 function hookJWTStrategy(passport) {
   const options = {
     secretOrKey: config.jwtSecret,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
+    // jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     ignoreExpiration: false
   };
 
   passport.use(new JWTStrategy(options, (JWTPayload, callback) => {
-    User.findOne({ where: { username: JWTPayload.username } })
+    models.user.findOne({ where: { username: JWTPayload.username } })
       .then((user) => {
         if (!user) {
           callback(null, false);
@@ -22,4 +24,17 @@ function hookJWTStrategy(passport) {
   }));
 }
 
-export default hookJWTStrategy;
+function checkRouteAccess(accessLevel, callback) {
+  console.log('#####',accessLevel);
+  function checkUserRole(req, res) {
+    console.log('####',accessLevel, req.body);
+    if (!(accessLevel & req.user.role)) {
+      res.sendStatus(403);
+      return;
+    }
+    callback(req, res);
+  }
+  return checkUserRole;
+}
+
+export default { hookJWTStrategy, checkRouteAccess };

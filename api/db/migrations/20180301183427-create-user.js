@@ -1,3 +1,5 @@
+const config = require('../../config/config');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('users', {
@@ -27,6 +29,10 @@ module.exports = {
       password: {
         notEmpty: true,
         type: Sequelize.STRING,
+      },
+      role: {
+        type: Sequelize.INTEGER,
+        defaultValue: config.userRoles.user
       },
       lastLogin: {
         type: Sequelize.DATE

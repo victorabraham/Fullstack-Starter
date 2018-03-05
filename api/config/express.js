@@ -9,13 +9,12 @@ import httpStatus from 'http-status';
 import expressWinston from 'express-winston';
 import expressValidation from 'express-validation';
 import passport from 'passport';
-import session from 'express-session';
 import helmet from 'helmet';
 import winstonInstance from './winston';
 import routes from '../server/routes/index.route';
 import config from './config';
 import APIError from '../server/helpers/APIError';
-import hookJWTStrategy from '../server/services/authentication.service';
+import { hookJWTStrategy } from '../server/services/authentication.service';
 
 const app = express();
 
@@ -37,10 +36,7 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
-// session secret
-app.use(session({ secret: config.jwtSecret, resave: true, saveUninitialized: true })); // To remove
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions to remove
 // Hook the passport JWT strategy.
 hookJWTStrategy(passport);
 

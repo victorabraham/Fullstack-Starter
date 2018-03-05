@@ -1,4 +1,4 @@
-import Joi from 'joi';
+const Joi = require('joi');
 
 // require and configure dotenv, will load vars in .env in PROCESS.ENV
 require('dotenv').config();
@@ -30,15 +30,31 @@ if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
 
+const userRoles = {
+  user: 1,    // ...001
+  admin: 2,     // ...010
+  superAdmin: 4     // ...100
+};
+
+const accessLevels = {
+  // eslint-disable-next-line no-bitwise
+  user: userRoles.user | userRoles.admin | userRoles.superAdmin,    // ...111
+  // eslint-disable-next-line no-bitwise
+  admin: userRoles.admin | userRoles.superAdmin,                       // ...110
+  superAdmin: userRoles.superAdmin                                        // ...100
+};
+
 const config = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   mongooseDebug: envVars.MONGOOSE_DEBUG,
   jwtSecret: envVars.JWT_SECRET,
+  userRoles,
+  accessLevels,
   mongo: {
     host: envVars.MONGO_HOST,
     port: envVars.MONGO_PORT
   }
 };
 
-export default config;
+module.exports = config;

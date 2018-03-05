@@ -1,4 +1,6 @@
-import bCrypt from 'bcrypt-nodejs';
+const bCrypt = require('bcrypt-nodejs');
+
+const config = require('../../config/config');
 
 const generateHash = pass => bCrypt.hashSync(pass, bCrypt.genSaltSync(8), null);
 
@@ -41,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    role: {
+      type: DataTypes.INTEGER,
+      defaultValue: config.userRoles.user
     },
     lastLogin: {
       type: DataTypes.DATE
