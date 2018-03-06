@@ -25,9 +25,7 @@ function hookJWTStrategy(passport) {
 }
 
 function checkRouteAccess(accessLevel, callback) {
-  console.log('#####',accessLevel);
   function checkUserRole(req, res) {
-    console.log('####',accessLevel, req.body);
     if (!(accessLevel & req.user.role)) {
       res.sendStatus(403);
       return;

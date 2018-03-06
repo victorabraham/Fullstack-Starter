@@ -21,6 +21,15 @@ export default {
     }
   },
 
+  // POST /api/org
+  createOrg: {
+    body: {
+      name: Joi.string().required(),
+      email: Joi.string().required(),
+      description: Joi.string().required()
+    }
+  },
+
   // POST /api/auth/login
   login: {
     body: {
