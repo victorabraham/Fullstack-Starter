@@ -1,77 +1,73 @@
-import Promise from 'bluebird';
-import mongoose from 'mongoose';
-import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
+const bCrypt = require('bcrypt-nodejs');
 
-/**
- * User Schema
- */
-const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true
-  },
-  mobileNumber: {
-    type: String,
-    required: true,
-    match: [/^[1-9][0-9]{9}$/, 'The value of path {PATH} ({VALUE}) is not a valid mobile number.']
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+const config = require('../../config/config');
+
+const generateHash = pass => bCrypt.hashSync(pass, bCrypt.genSaltSync(8), null);
+
+const hashPassword = (user) => {
+  if (user.changed('password')) {
+    // return bCrypt.hash(user.password, 10)
+    //         .then((password) => {
+    //           user.password = password;
+    //         });
+    user.password = generateHash(user.password);
   }
-});
-
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
-
-/**
- * Methods
- */
-UserSchema.method({
-});
-
-/**
- * Statics
- */
-UserSchema.statics = {
-  /**
-   * Get user
-   * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, APIError>}
-   */
-  get(id) {
-    return this.findById(id)
-      .exec()
-      .then((user) => {
-        if (user) {
-          return user;
-        }
-        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
-        return Promise.reject(err);
-      });
-  },
-
-  /**
-   * List users in descending order of 'createdAt' timestamp.
-   * @param {number} skip - Number of users to be skipped.
-   * @param {number} limit - Limit number of users to be returned.
-   * @returns {Promise<User[]>}
-   */
-  list({ skip = 0, limit = 50 } = {}) {
-    return this.find()
-      .sort({ createdAt: -1 })
-      .skip(+skip)
-      .limit(+limit)
-      .exec();
-  }
+  return user;
 };
 
-/**
- * @typedef User
- */
-export default mongoose.model('User', UserSchema);
+module.exports = (sequelize, DataTypes) => {
+  const user = sequelize.define('user', {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true
+      }
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    role: {
+      type: DataTypes.INTEGER,
+      defaultValue: config.userRoles.user
+    },
+    lastLogin: {
+      type: DataTypes.DATE
+    },
+  }, {
+    hooks: {
+      beforeValidate: hashPassword
+    }
+  });
+
+  user.prototype.comparePasswords = function (password, callback) {
+    bCrypt.compare(password, this.password, (error, isMatch) => {
+      if (error) {
+        return callback(error);
+      }
+      return callback(null, isMatch);
+    });
+  };
+
+  user.associate = (models) => {
+    // associations can be defined here
+  };
+  return user;
+};

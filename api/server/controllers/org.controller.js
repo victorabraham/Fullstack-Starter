@@ -1,6 +1,6 @@
 import models from '../models';
 
-// Register a user.
+// Create an org.
 const create = (req, res, next) => {
   const orgData = {
     name: req.body.name,
