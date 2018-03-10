@@ -42,6 +42,7 @@ function create(req, res, next) {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
+          orgId: req.body.orgId
         };
         userDao.create(data)
           .then((newUser, created) => {
@@ -66,6 +67,7 @@ function update(req, res, next) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
+    orgId: req.body.orgId
   };
   userDao.update(req.params.userId, data)
     .then((saveResult) => {

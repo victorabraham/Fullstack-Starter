@@ -63,6 +63,7 @@
     "passport-local": "false1.0.0",
     "sequelize": "false4.35.0",
     "sqlite3": "false3.1.13",
+    "uuid": "false3.2.1",
     "winston": "2.3.0"
   },
   "devDependencies": {

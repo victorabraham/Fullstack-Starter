@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 export default {
-  //mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
+  // mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
   // POST /api/users
   createUser: {
     body: {
@@ -20,7 +20,7 @@ export default {
       email: Joi.string().required(),
     },
     params: {
-      userId: Joi.string().hex().required()
+      userId: Joi.string().required()
     }
   },
 
@@ -39,9 +39,33 @@ export default {
       name: Joi.string().required(),
       email: Joi.string().required(),
       description: Joi.string().required()
+    },
+    params: {
+      orgId: Joi.string().required()
     }
   },
 
+  // POST /api/licenses
+  createLicense: {
+    body: {
+      startDate: Joi.date().required(),
+      endDate: Joi.date().required(),
+      orgId: Joi.string().required(),
+      noOfUsers: Joi.number().integer().max(1000).required()
+    }
+  },
+
+  // PUT /api/licenses
+  updateLicense: {
+    body: {
+      startDate: Joi.date().required(),
+      endDate: Joi.date().required(),
+      noOfUsers: Joi.number().integer().max(1000).required()
+    },
+    params: {
+      licenseId: Joi.string().required()
+    }
+  },
   // POST /api/auth/login
   login: {
     body: {

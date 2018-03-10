@@ -1,5 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
   const License = sequelize.define('License', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
     startDate: {
       type: DataTypes.DATE
     },
