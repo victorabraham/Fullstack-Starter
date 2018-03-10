@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const organization = sequelize.define('organization', {
+  const Organization = sequelize.define('Organization', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -29,8 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   }, {});
-  organization.associate = (models) => {
+  Organization.associate = (models) => {
     // associations can be defined here
   };
-  return organization;
+  return Organization;
 };

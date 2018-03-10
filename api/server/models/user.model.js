@@ -16,7 +16,7 @@ const hashPassword = (user) => {
 };
 
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
+  const User = sequelize.define('User', {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  user.prototype.comparePasswords = function (password, callback) {
+  User.prototype.comparePasswords = function (password, callback) {
     bCrypt.compare(password, this.password, (error, isMatch) => {
       if (error) {
         return callback(error);
@@ -66,8 +66,8 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  user.associate = (models) => {
+  User.associate = (models) => {
     // associations can be defined here
   };
-  return user;
+  return User;
 };
