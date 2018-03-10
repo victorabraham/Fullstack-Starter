@@ -30,7 +30,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Organization.associate = (models) => {
-    // associations can be defined here
+    Organization.hasMany(models.User, {
+      foreignKey: 'orgId',
+      as: 'users',
+      onDelete: 'CASCADE',
+    });
+  };
+  Organization.associate = (models) => {
+    Organization.hasMany(models.License, {
+      foreignKey: 'orgId',
+      as: 'licenses',
+      onDelete: 'CASCADE',
+    });
   };
   return Organization;
 };

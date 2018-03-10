@@ -51,11 +51,13 @@ module.exports = (sequelize, DataTypes) => {
     lastLogin: {
       type: DataTypes.DATE
     },
-  }, {
-    hooks: {
-      beforeValidate: hashPassword
+  },
+    {
+      hooks: {
+        beforeValidate: hashPassword
+      }
     }
-  });
+  );
 
   User.prototype.comparePasswords = function (password, callback) {
     bCrypt.compare(password, this.password, (error, isMatch) => {
@@ -67,7 +69,10 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.associate = (models) => {
-    // associations can be defined here
+    User.belongsTo(models.Organization, {
+      foreignKey: 'orgId',
+      onDelete: 'CASCADE',
+    });
   };
   return User;
 };

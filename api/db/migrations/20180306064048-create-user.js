@@ -2,12 +2,12 @@ const config = require('../../config/config');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('Users', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       firstName: {
         notEmpty: true,
@@ -30,6 +30,16 @@ module.exports = {
         notEmpty: true,
         type: Sequelize.STRING,
       },
+      orgId: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        onDelete: 'cascade',
+        references: {
+          model: 'Organizations',
+          key: 'id',
+          as: 'orgId'
+        }
+      },
       role: {
         type: Sequelize.INTEGER,
         defaultValue: config.userRoles.user
@@ -47,5 +57,5 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('users')
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('Users')
 };
