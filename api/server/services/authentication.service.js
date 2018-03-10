@@ -1,6 +1,6 @@
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 // import User from '../models/user';
-import models from '../models';
+import { User } from '../models';
 import config from '../../config/config';
 
 // Hooks the JWT Strategy.
@@ -13,7 +13,7 @@ function hookJWTStrategy(passport) {
   };
 
   passport.use(new JWTStrategy(options, (JWTPayload, callback) => {
-    models.user.findOne({ where: { username: JWTPayload.username } })
+    User.findOne({ where: { username: JWTPayload.username } })
       .then((user) => {
         if (!user) {
           callback(null, false);

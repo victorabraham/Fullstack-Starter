@@ -10,7 +10,7 @@ export default {
     }
   },
 
-  // UPDATE /api/users/:userId
+  // PUT /api/users/:userId
   updateUser: {
     body: {
       username: Joi.string().required(),
@@ -26,6 +26,15 @@ export default {
 
   // POST /api/org
   createOrg: {
+    body: {
+      name: Joi.string().required(),
+      email: Joi.string().required(),
+      description: Joi.string().required()
+    }
+  },
+
+  // PUT /api/org
+  updateOrg: {
     body: {
       name: Joi.string().required(),
       email: Joi.string().required(),

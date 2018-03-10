@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import util from 'util';
 
 // config should be imported before importing any other file

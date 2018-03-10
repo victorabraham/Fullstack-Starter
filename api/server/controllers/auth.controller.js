@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
-import models from '../models';
+import { User } from '../models';
 import config from '../../config/config';
 
 // Register a user.
 const signUp = (req, res, next) => {
-  models.user.findOne({
+  User.findOne({
     where: {
       username: req.body.username
     }
@@ -21,7 +21,7 @@ const signUp = (req, res, next) => {
         lastName: req.body.lastName,
         email: req.body.email,
       };
-      models.user.create(data).then((newUser, created) => {
+      User.create(data).then((newUser, created) => {
         if (!newUser) {
           res.send(false);
         }
@@ -47,7 +47,7 @@ const authenticateUser = (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    models.user.findOne({
+    User.findOne({
       where: {
         username
       }
@@ -74,4 +74,18 @@ const authenticateUser = (req, res, next) => {
   }
 };
 
-export default { signUp, authenticateUser };
+/**
+ * This is a protected route. Will return random number only if jwt token is provided in header.
+ * @param req
+ * @param res
+ * @returns {*}
+ */
+function getRandomNumber(req, res) {
+  // req.user is assigned by jwt middleware if valid token is provided
+  return res.json({
+    user: req.user,
+    num: Math.random() * 100
+  });
+}
+
+export default { signUp, authenticateUser, getRandomNumber };
