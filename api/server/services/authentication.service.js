@@ -13,6 +13,7 @@ function hookJWTStrategy(passport) {
   };
 
   passport.use(new JWTStrategy(options, (JWTPayload, callback) => {
+    console.log(JWTPayload);
     User.findOne({ where: { username: JWTPayload.username } })
       .then((user) => {
         if (!user) {

@@ -66,6 +66,24 @@ export default {
       licenseId: Joi.string().required()
     }
   },
+
+  // POST /api/orders
+  createOrder: {
+    body: {
+      userId: Joi.string().required(),
+    }
+  },
+
+  // PUT /api/orders
+  updateOrder: {
+    body: {
+      userId: Joi.string().required(),
+    },
+    params: {
+      orderId: Joi.string().required()
+    }
+  },
+
   // POST /api/auth/login
   login: {
     body: {
