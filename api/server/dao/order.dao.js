@@ -16,7 +16,11 @@ const read = orderId => (
   Order.findOne({
     where: {
       id: orderId
-    }
+    },
+    include: [{
+      model: OrderItem,
+      as: 'orderItems',
+    }],
   })
 );
 
