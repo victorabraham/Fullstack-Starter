@@ -49,6 +49,7 @@ const config = {
   port: envVars.PORT,
   mongooseDebug: envVars.MONGOOSE_DEBUG,
   jwtSecret: envVars.JWT_SECRET,
+  expiresIn: '7d',
   userRoles,
   accessLevels,
   mongo: {

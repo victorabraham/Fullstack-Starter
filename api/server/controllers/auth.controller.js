@@ -60,7 +60,7 @@ const authenticateUser = (req, res, next) => {
             const token = jwt.sign(
               { username: user.username },
               config.jwtSecret,
-              { expiresIn: '30m' }
+              { expiresIn: config.expiresIn }
             );
             res.json({ success: true, token });
           } else {
