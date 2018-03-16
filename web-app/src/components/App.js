@@ -6,7 +6,7 @@ import HomePage from './HomePage';
 import FuelSavingsPage from './containers/FuelSavingsPage';
 import OrdersPage from './containers/OrdersPage';
 import AboutPage from './AboutPage';
-import LoginPage from './LoginPage';
+import LoginPage from './containers/LoginPage';
 import NotFoundPage from './NotFoundPage';
 import Header from './common/Header';
 import Authorization from './common/Authorization';
