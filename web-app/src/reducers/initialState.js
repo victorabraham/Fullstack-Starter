@@ -1,4 +1,7 @@
 export default {
+  auth: { isAuthenticated: localStorage.getItem('vsid') ? true : false },
+  orders: [],
+  ajaxCallsInProgress: 0,
   fuelSavings: {
     newMpg: '',
     tradeMpg: '',
