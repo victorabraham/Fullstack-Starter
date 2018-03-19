@@ -3,11 +3,6 @@ $vin-blue: #5bb7db;
 $vin-green: #60b044;
 $vin-red: #ff0000;
 
-/* Styles */
-body {
-  
-}
-
 h2 {
 	color: $vin-blue;
 }
@@ -16,3 +11,39 @@ h2 {
 .loss { color: $vin-red; }
 input.small { width: 46px; }
 td.fuel-savings-label { width: 175px; }
+
+
+
+html {
+	font-family: 'Roboto', sans-serif;
+	-webkit-font-smoothing: antialiased;
+  }
+  
+  body, h1, h2, h3, h4, h5, h6 {
+	font-size: 15px;
+	margin: 0;
+	line-height: 24px;
+  }
+  
+  body {
+	margin: 0;
+	background-color: #efefef;
+  }
+  
+  body, html, #app, #app > div{
+	height: 100%;
+  }
+  
+  a {
+	color: #ff4081;
+	text-decoration: none;
+  }
+  
+  a:hover {
+	text-decoration: underline;
+  }
+  
+  .m-b-15 {
+	margin-bottom: 15px
+  }
+  
