@@ -27,6 +27,7 @@ const LoginForm = ({username, password, message, onChange, onSave}) => {
             className="btn btn-primary"
             onClick={onSave}/>
         </form>
+        
     </div>
   );
 };

@@ -12,7 +12,6 @@ export default function Authorization(allowedRoles) {
 
       constructor(props) {
         super(props);
-        console.log(props.allowedRoles);
       }
 
       render() {
