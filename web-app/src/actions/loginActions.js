@@ -17,6 +17,10 @@ export function loginError(message) {
   return {type: types.LOGIN_FAILURE, message};
 }
 
+export function logoutSuccess() {
+  return {type: types.LOGOUT_SUCCESS};
+}
+
 export function findSavedAuthSession() {
   const token = localStorage.getItem('vsid');
   if (token) {
@@ -33,7 +37,7 @@ export function login(credentials) {
     dispatch(loginRequest(credentials));
     return orderApi.login(credentials).then(result => {
       localStorage.setItem('vsid', result.token);
-      history.push('/orders');
+      history.push('/dashboard');
       dispatch(loginSuccess(result.token, Object.assign(jwtDecode(result.token), {role: 'admin'})));
     }).catch(error => {
       dispatch(loginError(error.message));

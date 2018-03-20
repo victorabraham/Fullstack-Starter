@@ -15,8 +15,8 @@ export default function Authorization(allowedRoles) {
       }
 
       render() {
-        const { user } = this.props;
-        if (allowedRoles.includes(user.role)) {
+        const { auth } = this.props;
+        if (auth && auth.user && allowedRoles.includes(auth.user.role)) {
           return <WrappedComponent {...this.props} />;
         } else {
           return <h1>You are not allowed to access this page</h1>;
@@ -24,13 +24,13 @@ export default function Authorization(allowedRoles) {
       }
 
       static propTypes = {
-        user: PropTypes.object,
+        auth: PropTypes.object,
       };
     }
 
     function mapStateToProps(state) {
       return {
-        user: state.auth.user
+        auth: state.auth
       };
     }
 

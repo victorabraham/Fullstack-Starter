@@ -9,11 +9,16 @@ import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 
 const data = {
-  menus: [
+  authMenus: [
     { text: 'DashBoard', icon: <Assessment/>, link: '/dashboard' },
-    { text: 'Form Page', icon: <Web/>, link: '/form' },
-    { text: 'Table Page', icon: <GridOn/>, link: '/table' },
-    { text: 'Login Page', icon: <PermIdentity/>, link: '/login' }
+    { text: 'Form', icon: <Web/>, link: '/form' },
+    { text: 'Table', icon: <GridOn/>, link: '/table' },
+    { text: 'Ordres', icon: <GridOn/>, link: '/orders' },
+    { text: 'Sign out', icon: <PermIdentity/>, link: '/login' },
+  ],
+  guestMenus: [
+    { text: 'About', icon: <Web/>, link: '/about' },
+    { text: 'Login', icon: <PermIdentity/>, link: '/login' },
   ],
   tablePage: {
     items: [

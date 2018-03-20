@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';  
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from '../Header';
 import LeftDrawer from '../LeftDrawer';
@@ -42,19 +44,24 @@ class AppBody extends React.Component {
       }
     };
 
+    const isAuthenticated = this.props.auth && this.props.auth.isAuthenticated;
+
+    let menus = isAuthenticated? Data.authMenus : Data.guestMenus;
+
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <div>
           <Header styles={styles.header}
-                  handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+                  handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)} 
+                  auth={this.props.auth}/>
 
-            <LeftDrawer navDrawerOpen={navDrawerOpen}
-                        menus={Data.menus}
-                        username="User Admin"/>
+          <LeftDrawer navDrawerOpen={navDrawerOpen}
+                      menus={menus}
+                      auth={this.props.auth}/>
 
-            <div style={styles.container}>
-              {this.props.children}
-            </div>
+          <div style={styles.container}>
+            {this.props.children}
+          </div>
         </div>
       </MuiThemeProvider>
     );
@@ -63,7 +70,14 @@ class AppBody extends React.Component {
 
 AppBody.propTypes = {
   children: PropTypes.element,
-  width: PropTypes.number
+  width: PropTypes.number,
+  auth: PropTypes.object
 };
 
-export default withWidth()(AppBody);
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default compose(connect(mapStateToProps, null), withWidth())(AppBody);

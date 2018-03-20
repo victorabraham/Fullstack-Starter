@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes';
 import orderApi from '../api/orderApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import { updateTotal } from '../utils/orderHelpers';
 
 export function loadOrdersSuccess(orders) {
   return { type: types.LOAD_ORDERS_SUCCESS, orders};
@@ -18,7 +19,7 @@ export function loadOrders() {
   return function(dispatch) {
     dispatch(beginAjaxCall());
     return orderApi.getAllOrders().then(orders => {
-      dispatch(loadOrdersSuccess(orders));
+      dispatch(loadOrdersSuccess(updateTotal(orders)));
     }).catch(error => {
       throw(error);
     });

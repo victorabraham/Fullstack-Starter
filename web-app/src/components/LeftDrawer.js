@@ -52,13 +52,13 @@ const LeftDrawer = (props) => {
       docked={true}
       open={navDrawerOpen}>
         <div style={styles.logo}>
-          Material Admin
+          Fullstack Starter
         </div>
         <div style={styles.avatar.div}>
           <Avatar src="http://www.material-ui.com/images/uxceo-128.jpg"
                   size={50}
                   style={styles.avatar.icon}/>
-          <span style={styles.avatar.span}>{props.username}</span>
+          <span style={styles.avatar.span}>{props.auth && props.auth.user && <span>{props.auth.user.role}</span>}</span>
         </div>
         <div>
           {props.menus.map((menu, index) =>
@@ -78,7 +78,7 @@ const LeftDrawer = (props) => {
 LeftDrawer.propTypes = {
   navDrawerOpen: PropTypes.bool,
   menus: PropTypes.array,
-  username: PropTypes.string,
+  auth: PropTypes.object,
 };
 
 export default LeftDrawer;
