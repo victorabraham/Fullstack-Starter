@@ -1,6 +1,6 @@
 import { urlEncode } from '../utils/urlHelpers';
 const endpoint = 'http://localhost:9001';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlY29uZEB0ZXN0LmNvbSIsImlhdCI6MTUyMDk5MzU5NiwiZXhwIjoxNTIxNTk4Mzk2fQ.rBWjU4Agd76qnlM9646_Iom6ueF4pqkns_4MX0jCPkE';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlY29uZEB0ZXN0LmNvbSIsImlhdCI6MTUyMTYwNjM0NywiZXhwIjoxNTIyMjExMTQ3fQ.rrv_mkxTfGP_KMXzc7ANj-WXKAnXRsFInDvFkvJWdnk';
 
 class OrderApi {
   static doCallout(method, url, isAuth, type, body) {

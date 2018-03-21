@@ -50,7 +50,7 @@ export class OrdersPage extends React.Component {
       <PageBase title="Orders"
               navigation="Application / Orders">
         <div>
-          <Link to="/orders/" >
+          <Link to="/orders/New" >
             <FloatingActionButton style={styles.floatingActionButton} backgroundColor={pink500}>
               <ContentAdd />
             </FloatingActionButton>
